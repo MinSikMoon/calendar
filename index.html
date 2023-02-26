@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Basic Calendar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: solid 1px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px;
+      }
+      th {
+        background-color: #dddddd;
+      }
+      .align-center {
+        text-align: center;
+      }
+      .align-right {
+        text-align: right;
+      }
+      #button-select-month {
+        padding: 10px;
+      }
+      .today {
+        background-color: yellowgreen;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="year-month" class="align-center"></h1>
+    <div id="button-select-month" class="align-right">
+      <button onclick="prevMonth()">◁</button>
+      <button onclick="nextMonth()">▷</button>
+      <button onclick="showCurrentMonth()">오늘</button>
+    </div>
+    <table id="calendar">
+      <thead>
+        <tr>
+          <th>일요일</th>
+          <th>월요일</th>
+          <th>화요일</th>
+          <th>수요일</th>
+          <th>목요일</th>
+          <th>금요일</th>
+          <th>토요일</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="calendar.js" async></script>
+  </body>
+</html>
