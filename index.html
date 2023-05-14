@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Basic Calendar</title>
+    <title>Basic Calendar with D-DAY function</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       table {
@@ -26,11 +26,15 @@
       .align-right {
         text-align: right;
       }
-      #button-select-month {
+      .padding-default {
         padding: 10px;
       }
       .today {
         background-color: yellowgreen;
+        font-weight: bold;
+      }
+      .dDay {
+        background-color: pink;
         font-weight: bold;
       }
       .red-text {
@@ -43,10 +47,15 @@
   </head>
   <body>
     <h1 id="year-month" class="align-center"></h1>
-    <div id="button-select-month" class="align-right">
+    <div id="button-select-month" class="align-right padding-default">
       <button onclick="prevMonth()">◁</button>
       <button onclick="nextMonth()">▷</button>
       <button onclick="showCurrentMonth()">오늘</button>
+    </div>
+    <div class="align-right padding-default">
+      <span>목표 날짜를 선택하세요 : </span>
+      <input type="date" id="goalDate" />
+      <button onclick="calculateDday()">계산하기</button>
     </div>
     <table id="calendar">
       <thead>

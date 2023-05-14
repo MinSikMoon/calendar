@@ -1,7 +1,20 @@
 //변수 선언
 let today = new Date();
+today.setHours(0, 0, 0, 0);
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
+let goalDate;
+
+const calculateDday = () => {
+  goalDate = new Date(document.getElementById("goalDate").value);
+  displayCalendar();
+};
+
+const calculateDayDiff = (curDate, goalDate) => {
+  return Math.ceil(
+    (goalDate.getTime() - curDate.getTime()) / (1000 * 60 * 60 * 24) - 1
+  );
+};
 
 const displayYearMonth = () => {
   const yearMonth = document.querySelector("#year-month");
@@ -36,16 +49,38 @@ const displayCalendar = () => {
       ) {
         break;
       } else {
-        // 원칙
-        cellText = document.createTextNode(day);
-        cell.appendChild(cellText);
-        // 만약 day가 오늘이라면 today라는 class를 붙여준다.
+        // 기본적으로 도는 루프
+        // today class 삽입 로직
         if (
           day === today.getDate() &&
           currentMonth === today.getMonth() &&
           currentYear === today.getFullYear()
         ) {
           cell.classList.add("today");
+        }
+        cellText = document.createTextNode(day);
+        let tempDate = new Date(currentYear, currentMonth, day);
+        cell.appendChild(cellText);
+        // d-day 삽입 로직
+        if (
+          goalDate !== undefined &&
+          goalDate !== null &&
+          tempDate >= today &&
+          tempDate < goalDate
+        ) {
+          if (
+            day === goalDate.getDate() &&
+            currentMonth === goalDate.getMonth() &&
+            currentYear === goalDate.getFullYear()
+          ) {
+            cell.classList.add("dDay");
+          }
+          cell.appendChild(document.createElement("br"));
+          cell.appendChild(
+            document.createTextNode(
+              "(-" + calculateDayDiff(tempDate, goalDate) + ")"
+            )
+          );
         }
       }
       row.appendChild(cell);
@@ -57,7 +92,7 @@ const displayCalendar = () => {
 const displayAll = () => {
   displayYearMonth();
   displayCalendar();
-}
+};
 
 const prevMonth = () => {
   //필터 : 해넘이
@@ -68,7 +103,7 @@ const prevMonth = () => {
     currentMonth--; //principle
   }
   displayAll();
-}
+};
 
 const nextMonth = () => {
   //필터 : 해넘이
@@ -79,13 +114,13 @@ const nextMonth = () => {
     currentMonth++; //principle
   }
   displayAll();
-}
+};
 
 const showCurrentMonth = () => {
   today = new Date();
   currentMonth = today.getMonth();
   currentYear = today.getFullYear();
   displayAll();
-}
+};
 
 displayAll();
